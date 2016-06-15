@@ -6,22 +6,31 @@ import sys
 import pickle
         
 
-class Worker:
+#class Worker:
 
-	def __init__(self):
-		self.Map_Input={}
-		self.Mapper_Output={}
-		self.Merged_data_values={}
-		self.Reducer_output={}
+
+Map_Input={}
+Mapper_Output={}
+Merged_data_values={}
+Reducer_output={}
 		
-	def Initialize(self,number):
-		for i in range(0,number):
-			self.Map_Input.update({random.randint(1,2),1})
+def Initialize():
+        output={}
+        for i in range(0,10):
+                output.update({random.randint(500000,600000):random.randint(1,2)})
+        return output
 		
-	#def Map(self,map_input):
+def Map(map_input):
+        output={}
+        for i in range(len(map_input)):
+                if map_input.values()==1:
+                        output.update({1,1})
+                else:
+                        output.update({2,1})
+        return output
 	
 	
-	#def Reduce(self,reduce_input):
+#def Reduce(self,reduce_input):
 
 		
 # create a socket object
@@ -37,21 +46,32 @@ except s.gaierror:
     sys.exit()	
 
 # connection to hostname on the port.
-s.connect(('127.0.0.1', 5000))    	
+s.connect(('127.0.0.1', 5000))
+#Sending Ready message to server
+message='Ready'
+s.send(message.encode())
+print('Message "%s" send' %message)
+
 #Receiving Message from Master 
-Master_message = s.recv(4096)	
+Master_message = s.recv(4096)
+Master_message=Master_message.decode()
 print ('Message from Master Received')
+
+
 
 #Checking Master's Messages
 
 if Master_message=='Run_Init':
 	# Stage Iniatialize : Reading tags within the range of the worker                      
-	Initialize(self,10)
+	Map_Input.update(Initialize())
 	#Sending message "Init OK"
 	message= 'Init_OK'
+	print(Map_Input)
+	Mapper_Output.update(Map(Map_Input))
+	print(Mapper_Output)
 	try :
 		#Set the whole string
-		s.sendall(message)
+		s.sendall(message.encode())
 	except socket.error:
 		#Send failed
 		print ('Sending Message Init_OK failed')
@@ -64,7 +84,7 @@ elif Master_message=='Run_Map':
 	message= 'Map_OK'
 	try :
 		#Set the whole string
-		s.sendall(message)
+		s.sendall(message.encode())
 	except socket.error:
 		#Send failed
 		print ('Sending Message Map_OK failed')
@@ -83,7 +103,7 @@ elif Master_message=='Run_Shuffle':
 	message= 'Shuffle_OK'
 	try :
 		#Set the whole string
-		s.sendall(message)
+		s.sendall(message.encode())
 	except socket.error:
 		#Send failed
 		print ('Sending Message Shuffle_OK failed')
@@ -100,7 +120,7 @@ elif Master_message=='Run_PrepareReduceInput':
 	message= 'PrepareReduce_OK'
 	try :
 		#Set the whole string
-		s.sendall(message)
+		s.sendall(message.encode())
 	except socket.error:
 		#Send failed
 		print ('Sending Message PrepareReduce_OK failed')
@@ -120,7 +140,7 @@ elif Master_message=='Run_Reduce':
 	message= 'Reduce_OK'
 	try :
 		#Set the whole string
-		s.sendall(message)
+		s.sendall(message.encode())
 	except socket.error:
 		#Send failed
 		print ('Sending Message Reduce OK failed')
