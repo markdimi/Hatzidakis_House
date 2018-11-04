@@ -1,0 +1,13 @@
+{%extends "webapp/header.html"%}
+
+
+	   {% block content %}
+		{%for sensorMeasurement in object_list %} 
+                					 <!4--2 digits the date format>
+			<h5> Tην εξής ημερομηνία: <b>{{sensorMeasurement.date|date:"Y-m-d-h-s" }}</b> καταγράφηκε η μέτρηση ν.{{sensorMeasurement.id}}: 
+<br><p align="middle">{{sensorMeasurement.sensor}} , {{sensorMeasurement.measurement1}}, {{sensorMeasurement.measurement2}} .<p> </br>
+		{%endfor%}
+
+	   {% endblock %}	
+	
+
