@@ -1,0 +1,21 @@
+{%extends "webapp/header.html"%}
+
+
+	   {% block content %}
+	{%for c in content%}
+		<p>{{c}}</p>
+		{%endfor%}
+
+
+<address>
+Υπεύθυνος Συντήρησης :<a href="mailto:agazis@ee.duth.gr"> Α.Γαζής </a>.<br> 
+Επιστημονική Υπεύθυνη: <a href="mailto:ekatsiri@ee.duth.gr"> Ε.Κατσίρη</a>.<br> 
+<br><br><br>
+Τμήμα Ηλεκτρολόγων Μηχανικών και Μηχανικών Υπολογιστών<br>
+Κτίριο Α΄ Πανεπιστημιούπολη Ξάνθης-Κιμμέρια<br>
+67100, Ξάνθη<br>
+
+</address>
+	   {% endblock %}	
+	
+

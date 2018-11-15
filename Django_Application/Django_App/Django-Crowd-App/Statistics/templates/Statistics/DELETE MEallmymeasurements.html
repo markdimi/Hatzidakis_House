@@ -1,0 +1,12 @@
+{%extends "webapp/header.html"%}
+
+
+{% block content %}
+<h3>
+<a href="/Statistics/{{SensorMeasurement.id}}"> {{ SensorMeasurement.sensor }}</a></h3>
+
+<div class="container">
+<h5> on {{ SensorMeasurement.date }} the sensor measurement was:  {{SensorMeasurement.measurement1}} and  {{SensorMeasurement.measurement2}}</h5>
+</div>
+<br><br>
+{% endblock %}
